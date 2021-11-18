@@ -1,7 +1,5 @@
-describe("About Functions", function() {
-
-  it("should declare functions", function() {
-
+describe('About Functions', function () {
+  it('should declare functions', function () {
     function add(a, b) {
       return a + b;
     }
@@ -9,15 +7,15 @@ describe("About Functions", function() {
     expect(add(1, 2)).toBe(3);
   });
 
-  it("should know internal variables override outer variables", function () {
-    var message = "Outer";
+  it('should know internal variables override outer variables', function () {
+    var message = 'Outer';
 
     function getMessage() {
       return message;
     }
 
     function overrideMessage() {
-      var message = "Inner";
+      var message = 'Inner';
       return message;
     }
 
@@ -26,10 +24,10 @@ describe("About Functions", function() {
     expect(message).toBe('Outer');
   });
 
-  it("should have lexical scoping", function () {
-    var variable = "top-level";
+  it('should have lexical scoping', function () {
+    var variable = 'top-level';
     function parentfunction() {
-      var variable = "local";
+      var variable = 'local';
       function childfunction() {
         return variable;
       }
@@ -38,12 +36,9 @@ describe("About Functions", function() {
     expect(parentfunction()).toBe('local');
   });
 
-  it("should use lexical scoping to synthesise functions", function () {
-
-    function makeMysteryFunction(makerValue)
-    {
-      var newFunction = function doMysteriousThing(param)
-      {
+  it('should use lexical scoping to synthesise functions', function () {
+    function makeMysteryFunction(makerValue) {
+      var newFunction = function doMysteriousThing(param) {
         return makerValue + param;
       };
       return newFunction;
@@ -55,46 +50,45 @@ describe("About Functions", function() {
     expect(mysteryFunction3(10) + mysteryFunction5(5)).toBe(23);
   });
 
-  it("should allow extra function arguments", function () {
-
+  it('should allow extra function arguments', function () {
     function returnFirstArg(firstArg) {
       return firstArg;
     }
 
-    expect(returnFirstArg("first", "second", "third")).toBe('first');
+    expect(returnFirstArg('first', 'second', 'third')).toBe('first');
 
     function returnSecondArg(firstArg, secondArg) {
       return secondArg;
     }
 
-    expect(returnSecondArg("only give first arg")).toBe(undefined);
+    expect(returnSecondArg('only give first arg')).toBe(undefined);
 
     function returnAllArgs() {
       var argsArray = [];
       for (var i = 0; i < arguments.length; i += 1) {
         argsArray.push(arguments[i]);
       }
-      return argsArray.join(",");
+      return argsArray.join(',');
     }
 
-    expect(returnAllArgs("first", "second", "third")).toBe('first,second,third');
+    expect(returnAllArgs('first', 'second', 'third')).toBe(
+      'first,second,third',
+    );
   });
 
-  it("should pass functions as values", function () {
-
+  it('should pass functions as values', function () {
     var appendRules = function (name) {
-      return name + " rules!";
+      return name + ' rules!';
     };
 
     var appendDoubleRules = function (name) {
-      return name + " totally rules!";
+      return name + ' totally rules!';
     };
 
     var praiseSinger = { givePraise: appendRules };
-    expect(praiseSinger.givePraise("John")).toBe('John rules!');
+    expect(praiseSinger.givePraise('John')).toBe('John rules!');
 
     praiseSinger.givePraise = appendDoubleRules;
-    expect(praiseSinger.givePraise("Mary")).toBe('Mary totally rules!');
-
+    expect(praiseSinger.givePraise('Mary')).toBe('Mary totally rules!');
   });
 });
